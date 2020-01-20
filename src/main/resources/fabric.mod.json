@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "winwonders",
+  "version": "${version}",
+  "name": "Window Wonders",
+  "description": "Simple mod that makes the game window keep its size and position between shutdowns.",
+  "authors": [
+    "2xsaiko"
+  ],
+  "contact": {
+    "homepage": "https://2x.ax/mods",
+    "sources": "https://git.dblsaiko.net/winwonders.git"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": { },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.2",
+    "minecraft": "1.15.x"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.dblsaiko.winwonders.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "MinecraftClientMixin",
+    "WindowMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
