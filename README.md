@@ -21,7 +21,3 @@ dependencies {
     modRuntime 'net.dblsaiko:winwonders:0.1.0-+'
 }
 ```
-
-## Issues? Requests? Patches?
-
-Bug tracker: https://bugs.dblsaiko.net/ (WIP, for now send me a mail with any patches/issues/suggestions you might have: bugs [at] dblsaiko.net)
