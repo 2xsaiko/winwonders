@@ -1,5 +1,7 @@
 package net.dblsaiko.winwonders;
 
+import net.fabricmc.loader.api.FabricLoader;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +13,7 @@ import static net.dblsaiko.winwonders.WindowWonders.MOD_ID;
 
 public class Config {
 
-    public static final Path DEFAULT_PATH = Paths.get("config").resolve("winsize.cfg");
+    public static final Path DEFAULT_PATH = FabricLoader.getInstance().getConfigDirectory().toPath().resolve("winsize.cfg");
     private static Config INSTANCE;
 
     public boolean restorePosition = true;
