@@ -6,8 +6,9 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+apply from: 'https://dblsaiko.net/pub/gradle/autoversion.gradle'
+
 archivesBaseName = project.archives_base_name
-version = project.mod_version
 group = project.maven_group
 
 minecraft {
@@ -76,4 +77,4 @@ publishing {
     }
 }
 
-apply from: 'https://raw.githubusercontent.com/2xsaiko/gradle-tools/master/publish/publish-slim.gradle'
+apply from: 'https://dblsaiko.net/pub/gradle/publish-slim.gradle'
