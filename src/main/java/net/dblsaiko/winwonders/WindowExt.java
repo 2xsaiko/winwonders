@@ -12,6 +12,8 @@ public interface WindowExt {
 
     int getWindowedHeight();
 
+    boolean isMaximized();
+
     @SuppressWarnings("ConstantConditions")
     static WindowExt from(Window window) {
         return (WindowExt) (Object) window;

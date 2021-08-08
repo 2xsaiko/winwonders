@@ -24,6 +24,7 @@ public class Config {
     public int winY = -1;
     public int winWidth = -1;
     public int winHeight = -1;
+    public boolean maximized = false;
 
     private Config() {}
 
@@ -65,6 +66,9 @@ public class Config {
                                 config.winWidth = parseIntOrZero(args[1]);
                                 config.winHeight = parseIntOrZero(args[2]);
                                 break;
+                            case "max":
+                                config.maximized = parseIntOrZero(args[1]) != 0;
+                                break;
                             default:
                         }
                     }
@@ -88,18 +92,21 @@ public class Config {
             out.printf("// Configuration for %s\n", MOD_ID);
             out.println();
             out.println("// Whether to restore the position/dimensions of the game window (1 = yes, 0 = no)");
-            out.printf("restore_pos %d\n", restorePosition ? 1 : 0);
-            out.printf("restore_dim %d\n", restoreDimensions ? 1 : 0);
+            out.printf("restore_pos %d\n", this.restorePosition ? 1 : 0);
+            out.printf("restore_dim %d\n", this.restoreDimensions ? 1 : 0);
             out.println();
             out.println("// Whether to save the position/dimensions of the game window to this file (1 = yes, 0 = no)");
-            out.printf("save_pos %d\n", savePosition ? 1 : 0);
-            out.printf("save_dim %d\n", saveDimensions ? 1 : 0);
+            out.printf("save_pos %d\n", this.savePosition ? 1 : 0);
+            out.printf("save_dim %d\n", this.saveDimensions ? 1 : 0);
             out.println();
             out.println("// Last position of the game window (x, y)");
-            out.printf("pos %d %d\n", winX, winY);
+            out.printf("pos %d %d\n", this.winX, this.winY);
             out.println();
             out.println("// Last dimensions of the game window (width, height)");
-            out.printf("dim %d %d\n", winWidth, winHeight);
+            out.printf("dim %d %d\n", this.winWidth, this.winHeight);
+            out.println();
+            out.println("// Whether the window was maximized");
+            out.printf("max %d", this.maximized ? 1 : 0);
         } catch (IOException e) {
             e.printStackTrace();
         }

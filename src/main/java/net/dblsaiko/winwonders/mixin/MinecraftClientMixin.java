@@ -22,10 +22,11 @@ public class MinecraftClientMixin {
         method = "<init>(Lnet/minecraft/client/RunArgs;)V",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/WindowProvider;createWindow(Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/client/util/Window;")
     )
-    private Window createWindow(WindowProvider windowProvider, WindowSettings windowSettings, String string, String string2) {
+    private Window wwCreateWindow(WindowProvider windowProvider, WindowSettings windowSettings, String string, String string2) {
         Config config = Config.getInstance();
+
         // Only override if overrideWidth/overrideHeight is not set, those should still have precedence
-        if (config.restoreDimensions && config.winHeight > 0 && config.winWidth > 0 && !(options.overrideHeight > 0 && options.overrideWidth > 0)) {
+        if (config.restoreDimensions && config.winHeight > 0 && config.winWidth > 0 && !(this.options.overrideHeight > 0 && this.options.overrideWidth > 0)) {
             windowSettings = new WindowSettings(
                 config.winWidth,
                 config.winHeight,
@@ -34,6 +35,7 @@ public class MinecraftClientMixin {
                 windowSettings.fullscreen
             );
         }
+
         return windowProvider.createWindow(windowSettings, string, string2);
     }
 
@@ -42,31 +44,37 @@ public class MinecraftClientMixin {
     @Shadow @Final public GameOptions options;
 
     @Inject(method = "close()V", at = @At("HEAD"))
-    private void close(CallbackInfo ci) {
+    private void wwClose(CallbackInfo ci) {
         Config config = Config.getInstance();
-        if (window.isFullscreen()) {
-            WindowExt wext = WindowExt.from(window);
+        WindowExt wext = WindowExt.from(this.window);
+
+        if (this.window.isFullscreen()) {
             if (config.savePosition) {
                 config.winX = wext.getWindowedX();
                 config.winY = wext.getWindowedY();
             }
+
             if (config.saveDimensions) {
                 config.winWidth = wext.getWindowedWidth();
                 config.winHeight = wext.getWindowedHeight();
+                config.maximized = wext.isMaximized();
             }
         } else {
             // The game only sets the windowed* variables when entering
             // fullscreen mode, so these are the accurate values when not in
             // fullscreen mode.
             if (config.savePosition) {
-                config.winX = window.getX();
-                config.winY = window.getY();
+                config.winX = this.window.getX();
+                config.winY = this.window.getY();
             }
+
             if (config.saveDimensions) {
-                config.winWidth = window.getWidth();
-                config.winHeight = window.getHeight();
+                config.winWidth = this.window.getWidth();
+                config.winHeight = this.window.getHeight();
+                config.maximized = wext.isMaximized();
             }
         }
+
         config.write(Config.DEFAULT_PATH);
     }
 }
